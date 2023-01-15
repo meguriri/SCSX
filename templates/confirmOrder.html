@@ -4,6 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="../static/css/style.css" />
     <script type="text/javascript" src="../static/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="../static/js/confirmOrder.js"></script>
 <title>华信</title>
 </head>
 <body>  
@@ -447,42 +448,14 @@
             	<span class="fr"></span>商品列表
             </div>
             <table border="0" class="car_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
-              <tr>
+              <tr id="title">
                 <td class="car_th" width="550">商品名称</td>
                 <td class="car_th" width="140">属性</td>
                 <td class="car_th" width="150">购买数量</td>
                 <td class="car_th" width="130">小计</td>
               </tr>
               <tr>
-                <td>
-                    <div class="c_s_img"><img src="../static/resources/images/c_1.jpg" width="73" height="73" /></div>
-                    Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                </td>
-                <td align="center">颜色：灰色</td>
-                <td align="center">1</td>
-                <td align="center" style="color:#ff4e00;">￥620.00</td>
-              </tr>
-              <tr class="car_tr">
-                <td>
-                    <div class="c_s_img"><img src="../static/resources/images/c_2.jpg" width="73" height="73" /></div>
-                    Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                </td>
-                <td align="center">颜色：灰色</td>
-                <td align="center">1</td>
-                <td align="center" style="color:#ff4e00;">￥620.00</td>
-              </tr>
-              <tr>
-                <td>
-                    <div class="c_s_img"><img src="../static/resources/images/c_3.jpg" width="73" height="73" /></div>
-                    Rio 锐澳 水蜜桃味白兰地鸡尾酒（预调酒） 275ml
-                </td>
-                <td align="center">颜色：灰色</td>
-                <td align="center">1</td>
-                <td align="center" style="color:#ff4e00;">￥620.00</td>
-              </tr>
-              <tr>
-                <td colspan="4" align="right" style="font-family:'Microsoft YaHei';">
-                    商品总价：￥1899.00 
+                <td colspan="4" id="totalPrice" align="right" style="font-family:'Microsoft YaHei';">
                 </td>
               </tr>
             </table>
@@ -493,13 +466,13 @@
             <table border="0" class="peo_tab" style="width:1110px;" cellspacing="0" cellpadding="0">
               <tr>
                 <td class="p_td" width="160">收货人</td>
-                <td width="395"><input type="text" name="" value="海贼王" size=50></td>
-                 <td class="p_td">手机</td>
-                <td><input type="text" name="" value="18600002222"></td>
+                <td width="395"><input type="text" name="person" id="person" value="" size=50 placeholder="请填写收货人"></td>
+                 <td class="p_td" >手机</td>
+                <td><input type="text" name="tel" id="tel" value="" placeholder="请填写联系方式"></td>
               </tr>
               <tr>
                 <td class="p_td">详细信息</td>
-                <td colspan="3"><input type="text" name="" value="四川省成都市武侯区" size=100></td>
+                <td colspan="3"><input type="text" name="address" id="address" value="" size=100 placeholder="请填写地址"></td>
 
               </tr>
              
@@ -511,11 +484,11 @@
               
               <tr height="70">
                 <td align="right">
-                	<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;">￥2899</span></b>
+                	<b style="font-size:14px;">应付款金额：<span style="font-size:22px; color:#ff4e00;" id="yfk"></span></b>
                 </td>
               </tr>
               <tr height="70">
-                <td align="right"><a href="#"><img src="../static/resources/images/btn_sure.gif" /></a></td>
+                <td align="right"><a href="javascript:void(0)" id="confirmOrder"><img src="../static/resources/images/btn_sure.gif" /></a></td>
               </tr>
             </table>
 

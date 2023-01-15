@@ -38,5 +38,11 @@ func InitRouter() *gin.Engine {
 		buyCar.POST("/delBuyCar", h.DelBuyCar())
 		buyCar.POST("/delAllBuyCar", h.DelAllBuyCar())
 	}
+	order := r.Group("/order")
+	{
+		order.GET("/", h.GetConfirmOrderHtml())
+		order.GET("/allProducts", h.GetAllProducts())
+		order.POST("/confirmOrder", h.ConfirmOrder())
+	}
 	return r
 }
