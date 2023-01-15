@@ -43,6 +43,19 @@ func InitRouter() *gin.Engine {
 		order.GET("/", h.GetConfirmOrderHtml())
 		order.GET("/allProducts", h.GetAllProducts())
 		order.POST("/confirmOrder", h.ConfirmOrder())
+		order.GET("/okOrder", h.GetOkOrderHtml())
+		order.GET("/myOrder", h.GetMyOrderHtml())
+		order.GET("/myOrderList", h.GetMyOrderListHtml())
+	}
+	message := r.Group("/message")
+	{
+		message.GET("/", h.GetMessageHtml())
+		message.POST("/send", h.GetMessage())
+	}
+	search := r.Group("/search")
+	{
+		search.GET("/", h.GetSearchHtml())
+		search.GET("/selByName", h.GetProductByName())
 	}
 	return r
 }

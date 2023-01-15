@@ -82,6 +82,22 @@ func GetAllProducts(mid int) ([]AllBuyCar, float64) {
 	return cars, totalPrice
 }
 
+func GetAllProduct(mid int) []BuyCar {
+	cars := make([]BuyCar, 0)
+	rows, err := MysqlDb.Query("select * from buycar where mid =?;", mid)
+	if err != nil {
+		fmt.Println("get all product err", err)
+		return cars
+	}
+	var car BuyCar
+	for rows.Next() {
+		rows.Scan(&car.Id, &car.Pid, &car.Num, &car.Mid)
+		cars = append(cars, car)
+	}
+	fmt.Println(cars)
+	return cars
+}
+
 func DelBuyCar(id int) bool {
 	_, err := MysqlDb.Exec("delete from buycar where id=?", id)
 	if err != nil {

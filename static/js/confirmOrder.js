@@ -56,7 +56,10 @@ $(document).ready(function () {
                 dataType:'json',
                 data:{"person":person,"tel":tel,"address":address},
                 success:function (res){
-                    console.log(res.msg)
+                    if(res.msg=="ok"){
+                        console.log(res.num)
+                        window.location.href="/order/okOrder?oid="+res.num
+                    }
                 }
             })
         }

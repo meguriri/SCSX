@@ -33,3 +33,20 @@ func ProductDetail(id int) (s Product) {
 	fmt.Println("s:", s)
 	return
 }
+
+func GetProductsByName(name string) []Product {
+	list := make([]Product, 0)
+	fmt.Println("sql name:", name)
+	rows, err := MysqlDb.Query("SELECT id,name,type,color,price,state,number,img,imgPath,cid FROM product WHERE name like ?", "%"+name+"%")
+	if err != nil {
+		fmt.Println("by name err:", err)
+		return list
+	}
+	for rows.Next() {
+		var s Product
+		rows.Scan(&s.Id, &s.Name, &s.Type, &s.Color, &s.Price, &s.State, &s.Number, &s.Img, &s.ImgPath, &s.Cid)
+		fmt.Println("product:", s)
+		list = append(list, s)
+	}
+	return list
+}

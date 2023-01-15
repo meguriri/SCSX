@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link type="text/css" rel="stylesheet" href="../static/css/style.css" />
     <script type="text/javascript" src="../static/js/jquery-3.1.1.min.js"></script>
-<!--    <script type="text/javascript" src="../static/js/confirmOrder.js"></script>-->
 <title>华信</title>
 </head>
 <body>  
@@ -451,16 +450,9 @@
             <table border="0" style="width:1000px; text-align:center;" cellspacing="0" cellpadding="0">
               <tr height="35">
                 <td style="font-size:18px;">
-                	感谢您在本店购物！您的订单已提交成功，请记住您的订单号: <font color="#ff4e00">2015092598275</font>
+                	感谢您在本店购物！您的订单已提交成功，请记住您的订单号: <span style="color: #ff4e00;"  id="oid"></span>
                 </td>
               </tr>
-              <tr>
-                <td style="font-size:14px; font-family:'宋体'; padding:10px 0 20px 0; border-bottom:1px solid #b6b6b6;">
-                	&nbsp; &nbsp;您的应付款金额为: <font color="#ff4e00">￥888.00</font>
-                </td>
-              </tr>
-             
-             
             </table>        	
         </div>
         <!--Begin 支付宝支付 Begin -->
@@ -554,7 +546,22 @@
     </div>
     <!--End Footer End -->    
 </div>
-
+<script>
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+        var context = "";
+        if (r != null)
+            context = decodeURIComponent(r[2]);
+        reg = null;
+        r = null;
+        return context == null || context == "" || context == "undefined" ? "" : context;
+    }
+    $(document).ready(function (){
+        oid=GetQueryString("oid")
+        $('#oid').html(oid)
+    })
+</script>
 </body>
 
 //letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>

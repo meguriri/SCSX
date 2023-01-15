@@ -29,7 +29,7 @@ func ConfirmOrder() gin.HandlerFunc {
 			var user data.User
 			json.Unmarshal([]byte(s), &user)
 			var order data.Order
-			ok, err := order.NewOrder(user.Id, person+","+tel+","+address)
+			oid, ok, err := order.NewOrder(user.Id, person+","+tel+","+address)
 			if !ok {
 				fmt.Println("order creat err:", err)
 				c.JSON(http.StatusOK, gin.H{
@@ -39,7 +39,50 @@ func ConfirmOrder() gin.HandlerFunc {
 			} else {
 				c.JSON(http.StatusOK, gin.H{
 					"msg": "ok",
-					"num": 100,
+					"num": oid,
+				})
+			}
+		}
+	}
+}
+
+func GetOkOrderHtml() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.HTML(http.StatusOK, "okOrder.html", nil)
+	}
+}
+
+func GetMyOrderHtml() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.HTML(http.StatusOK, "myOrder.html", nil)
+	}
+}
+
+func GetMyOrderListHtml() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		sid, err := c.Cookie("login")
+		if err != nil || !data.Exist(sid) {
+			fmt.Println("fail or not exit")
+			c.JSON(http.StatusOK, gin.H{
+				"msg": "fail",
+				"num": -1,
+			})
+		} else {
+			s, _ := data.Get(sid)
+			var user data.User
+			json.Unmarshal([]byte(s), &user)
+			list, ok := data.GetMyOrderList(user.Id)
+			l, _ := json.Marshal(list)
+			if !ok {
+				fmt.Println("order creat err:", err)
+				c.JSON(http.StatusOK, gin.H{
+					"msg":  "fail",
+					"list": nil,
+				})
+			} else {
+				c.JSON(http.StatusOK, gin.H{
+					"msg":  "ok",
+					"list": string(l),
 				})
 			}
 		}

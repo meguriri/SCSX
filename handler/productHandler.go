@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/meguriri/SCSX/data"
+	"github.com/meguriri/SCSX/logic"
 	"net/http"
 	"strconv"
 )
@@ -134,6 +135,34 @@ func AddCart() gin.HandlerFunc {
 					})
 				}
 			}
+		}
+	}
+}
+
+func GetSearchHtml() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.HTML(http.StatusOK, "search.html", nil)
+	}
+}
+
+func GetProductByName() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		name := c.Query("name")
+		n, _ := logic.ZhToUnicode([]byte(name))
+		fmt.Println("name:", string(n))
+		list := data.GetProductsByName(string(n))
+		str, err := json.Marshal(&list)
+		if err != nil {
+			c.JSON(http.StatusOK, gin.H{
+				"msg":  "fail",
+				"list": nil,
+			})
+		} else {
+			fmt.Println(string(str))
+			c.JSON(http.StatusOK, gin.H{
+				"msg":  "success",
+				"list": string(str),
+			})
 		}
 	}
 }

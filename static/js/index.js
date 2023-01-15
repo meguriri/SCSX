@@ -49,6 +49,11 @@ $(document).ready(function () {
             $('#categoryContent').html(str)
         },
     })
+
+    $('#search_smt').click(function (){
+        let name =$('#search_ipt').val()
+        window.location.href="/search?name="+name
+    })
 })
 
 function selByCid(cid){
