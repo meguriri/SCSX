@@ -21,8 +21,7 @@ func generateRandomString() string { //生成随机sid
 	return base64.URLEncoding.EncodeToString(b)
 }
 
-func (T *Session) Set() (string, error) { //生成session
-	//生成随机sid
+func (T *Session) Set() (string, error) {
 	sid := generateRandomString()
 	fmt.Println("set sid: ", sid)
 	//写入redis
@@ -34,7 +33,7 @@ func (T *Session) Set() (string, error) { //生成session
 	return sid, nil
 }
 
-func Get(sid string) (string, error) { //通过sid获取session
+func Get(sid string) (string, error) {
 	//从redis中根据sid获取session
 	session, err := redis.Rdb.Get(sid).Result()
 	if err != nil {
